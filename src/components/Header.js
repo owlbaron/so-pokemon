@@ -10,6 +10,6 @@ export const Header = () => (
         </Typography>
       </Toolbar>
     </AppBar>
-    <Box sx={{ height: (theme) => theme.mixins.toolbar }} />
+    <Box sx={{ height: (theme) => `${theme.mixins.toolbar}px` }} />
   </>
 );
