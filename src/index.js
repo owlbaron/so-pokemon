@@ -1,7 +1,7 @@
 import { ApolloProvider } from "@apollo/client";
 import { createTheme, ThemeProvider } from "@mui/material";
 import React from "react";
-import ReactDOM from "react-dom/client";
+import { render } from "react-dom";
 
 import { App } from "./App";
 import { client } from "./graphql/client";
@@ -12,11 +12,12 @@ const darkTheme = createTheme({
   },
 });
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+const rootElement = document.getElementById("root");
+render(
   <ApolloProvider client={client}>
     <ThemeProvider theme={darkTheme}>
       <App />
     </ThemeProvider>
-  </ApolloProvider>
+  </ApolloProvider>,
+  rootElement
 );
