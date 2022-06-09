@@ -1,26 +1,14 @@
 import { useLazyQuery } from "@apollo/client";
-import {
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Container,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Grid } from "@mui/material";
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { typeToIcon } from "../constants/typeToIcon";
 import { SearchContext } from "../contexts/Search";
 import Lottie from "lottie-react";
 import pokeballLoadingAnimation from "../lottie/pokeball-loading.json";
 
 import { GetAllPokemons } from "../graphql/query";
-import { pad } from "../utils/pad";
 import { useDispatch, useSelector } from "react-redux";
 import { useInView } from "react-hook-inview";
+import { Pokecard } from "./Pokecard";
 
 export const Pokelist = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -90,55 +78,15 @@ export const Pokelist = () => {
           <Grid container spacing={2}>
             {data.map((pokemon) => (
               <Grid key={pokemon.id} item xs={3}>
-                <Card sx={{ minHeight: 320 }}>
-                  <CardActionArea onClick={() => console.log("aaaaa")}>
-                    <CardMedia
-                      component="img"
-                      image={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pad(
-                        pokemon.id,
-                        3
-                      )}.png`}
-                      alt={`Pokemon: ${pokemon.name}`}
-                      sx={{ objectFit: "fill" }}
-                    />
-                    <CardContent>
-                      <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        spacing={2}
-                      >
-                        <Box>
-                          <Typography textTransform="capitalize" variant="h6">
-                            {`#${pad(pokemon.id, 3)}`}
-                          </Typography>
-                          <Typography textTransform="capitalize" variant="h5">
-                            {pokemon.name}
-                          </Typography>
-                          <Stack direction="row" spacing={2}>
-                            <Typography variant="subtitle1">
-                              {`${pokemon.height} m`}
-                            </Typography>
-                            <Typography variant="subtitle1">
-                              {`${pokemon.weight} kg`}
-                            </Typography>
-                          </Stack>
-                        </Box>
-                        <Stack spacing={2}>
-                          {pokemon.pokemon_v2_pokemontypes.map(
-                            (pokemonType) => {
-                              const Type =
-                                typeToIcon[pokemonType.pokemon_v2_type.name];
-
-                              return (
-                                <Type key={pokemonType.pokemon_v2_type.name} />
-                              );
-                            }
-                          )}
-                        </Stack>
-                      </Stack>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
+                <Pokecard
+                  id={pokemon.id}
+                  name={pokemon.name}
+                  height={pokemon.height}
+                  weight={pokemon.weight}
+                  types={pokemon.pokemon_v2_pokemontypes.map((type) => ({
+                    name: type.pokemon_v2_type.name,
+                  }))}
+                />
               </Grid>
             ))}
           </Grid>
