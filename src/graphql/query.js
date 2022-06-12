@@ -17,3 +17,18 @@ export const GetAllPokemons = gql`
     }
   }
 `;
+
+export const GetFlavorText = gql`
+  query GetFlavorText($language_id: Int = 9, $pokemon_id: Int = 1) {
+    pokemon_v2_pokemonspeciesflavortext(
+      where: {
+        language_id: { _eq: $language_id }
+        pokemon_species_id: { _eq: $pokemon_id }
+        pokemon_v2_pokemonspecy: {}
+      }
+      order_by: { id: desc }
+    ) {
+      flavor_text
+    }
+  }
+`;
