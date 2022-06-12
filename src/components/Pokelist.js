@@ -89,7 +89,7 @@ export const Pokelist = () => {
           <>
             <Grid container spacing={2}>
               {data.map((pokemon) => (
-                <Grid key={pokemon.id} item xs={3}>
+                <Grid key={pokemon.id} item xs={12} md={2} lg={3}>
                   <Pokecard
                     id={pokemon.id}
                     name={pokemon.name}

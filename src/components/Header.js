@@ -20,9 +20,11 @@ const Search = styled("div")(({ theme }) => ({
   },
   marginLeft: 0,
   width: "100%",
+  maxWidth: "150px",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(1),
     width: "auto",
+    maxWidth: "auto",
   },
 }));
 
@@ -85,7 +87,7 @@ export const Header = () => {
           <Typography variant="h6" color="inherit" component="h1">
             Só pokemon
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }} />
+          <Box sx={{ flexGrow: 1, display: { xs: "block", sm: "block" } }} />
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
