@@ -80,7 +80,7 @@ export const Header = () => {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar variant="dense">
           <Typography variant="h6" color="inherit" component="h1">
             Só pokemon
